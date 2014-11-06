@@ -3,10 +3,21 @@
 """Task 04 module"""
 
 
-class BaseException(Exception): pass
+class BaseException(Exception):
+    '''The Superclass'''
+    pass
 
-class StringError(BaseException, TypeError): pass
 
-class NumberError(BaseException, TypeError): pass
+class StringError(BaseException, TypeError):
+    '''String subclassed to BaseException and TypeError'''
+    pass
 
-class NonZeroError(NumberError): pass
+
+class NumberError(BaseException, TypeError):
+    '''NumberError subclassed to BaseException and TypeError'''
+    pass
+
+
+class NonZeroError(NumberError):
+    '''subclassed to NumberError'''
+    pass

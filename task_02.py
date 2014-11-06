@@ -17,13 +17,3 @@ def get_age(birthyear):
         return age
     else:
         raise InvalidAgeError
-    # try:
-    #     if age < 0:
-    #         raise InvalidAgeError
-    #     elif age >= 0:
-    #         return age
-    # except InvalidAgeError:
-    #     print "Pick a year in the past."
-    #     return age
-print get_age(1999)
-print get_age(2099)
