@@ -7,7 +7,7 @@ import time
 
 
 class CustomLogger(object):
-
+    '''custom logger'''
     def __init__(self, logfilename):
         self.logfilename = logfilename
         self.msgs = []
@@ -24,7 +24,7 @@ class CustomLogger(object):
 
         try:
             fhandler = open(self.logfilename, 'a')
-            
+
             try:
                 for index, entry in enumerate(self.msgs):
                     fhandler.write(str(entry) + '\n')
@@ -40,7 +40,7 @@ class CustomLogger(object):
                     del self.msgs[index]
             except IOError:
                 pass
-                
+
         except Exception as excep:
             self.log(excep)
             raise
