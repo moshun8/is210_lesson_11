@@ -13,19 +13,34 @@ class CustomLogger(object):
         self.msgs = []
 
     def log(self, msg, timestamp=None):
+        '''logs'''
         if timestamp is None:
             timestamp = time.time()
         self.msgs.append((timestamp, msg))
 
     def flush(self):
+        '''flushes'''
         handled = []
 
-        fhandler = open(self.logfilename, 'a')
-        for index, entry in enumerate(self.msgs):
-            fhandler.write(str(entry) + '\n')
-            handled.append(index)
+        try:
+            fhandler = open(self.logfilename, 'a')
+            
+            try:
+                for index, entry in enumerate(self.msgs):
+                    fhandler.write(str(entry) + '\n')
+                    handled.append(index)
 
-        fhandler.close()
+            except IOError as ioerr:
+                self.log(ioerr)
+            finally:
+                fhandler.close()
 
-        for index in handled[::-1]:
-            del self.msgs[index]
+            try:
+                for index in handled[::-1]:
+                    del self.msgs[index]
+            except IOError:
+                pass
+                
+        except Exception as excep:
+            self.log(excep)
+            raise
