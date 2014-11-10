@@ -58,16 +58,17 @@ class CurrentWeather(object):
             inspect = open(csv_path, 'r')
             report = csv.reader(inspect)
             for line in report:
-                lats = Decimal(line[3])
-                longs = Decimal(line[4])
-                self.zip_codes[line[0]] = {
-                    'city': line[1],
-                    'state': line[2],
-                    # 'latitude': line[3],
-                    # 'longitude': line[4],
-                    'latitude': lats,
-                    'longitude': longs,
-                    'country': line[5]}
+                if line[0] != 'zipcode':
+                    lats = Decimal(line[3])
+                    longs = Decimal(line[4])
+                    self.zip_codes[line[0]] = {
+                        'city': line[1],
+                        'state': line[2],
+                        # 'latitude': line[3],
+                        # 'longitude': line[4],
+                        'latitude': lats,
+                        'longitude': longs,
+                        'country': line[5]}
 
         except IOError:
             raise CurrentWeatherException(
